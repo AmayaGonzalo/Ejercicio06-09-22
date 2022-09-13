@@ -1,0 +1,15 @@
+{
+  "name": "ejercicio06-09-22",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@types/node": "^18.7.17",
+    "readline-sync": "^1.4.10"
+  }
+}
