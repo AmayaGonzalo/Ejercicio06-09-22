@@ -1,5 +1,5 @@
 var readlineSync = require('readline-sync');
-var respuesta;
+var respuesta = readlineSync.question("¿Quieres modificar su nombre? ");
 var Usuario = /** @class */ (function () {
     function Usuario(nombreIngresado, edadIngresado, generoIngresado) {
         this.nombre = nombreIngresado;
@@ -9,8 +9,7 @@ var Usuario = /** @class */ (function () {
     Usuario.prototype.CargarEdad = function (nuevaEdad) {
         this.edad = nuevaEdad;
     };
-    Usuario.prototype.modificarNombre = function () {
-        respuesta = readlineSync.question("¿Quieres modificar su nombre? ");
+    Usuario.prototype.modificarNombre = function (respuesta) {
         if (respuesta == "si")
             this.nombre = readlineSync.question("Ingrese su nuevo nombre: ");
         else { }
@@ -19,10 +18,11 @@ var Usuario = /** @class */ (function () {
     return Usuario;
 }());
 var Automovil = /** @class */ (function () {
-    function Automovil(ingresoMarca, ingresoModelo, ingresoGama) {
-        this.marca = ingresoMarca;
-        this.modelo = ingresoModelo;
-        this.gama = ingresoGama;
+    function Automovil(pMarca, pModelo, pGama, pCantidadActual) {
+        this.marca = pMarca;
+        this.modelo = pModelo;
+        this.gama = pGama;
+        this.cantidadActual = pCantidadActual;
     }
     Automovil.prototype.cargarCantidad = function () {
         this.cantidadActual = readlineSync.question("Ingrese cantidad de automoviles: ");
@@ -38,12 +38,12 @@ var Automovil = /** @class */ (function () {
     };
     return Automovil;
 }());
-var nuevoUsuario = new Usuario("Gonzalo", 35, "hombre");
+var nuevoUsuario = new Usuario("Pedro", 35, "hombre");
 console.log(nuevoUsuario);
-nuevoUsuario.modificarNombre();
+nuevoUsuario.modificarNombre(respuesta);
 nuevoUsuario.CargarEdad(36);
 console.log(nuevoUsuario);
-var autoFord = new Automovil("Ford", 2022, "alta");
+var autoFord = new Automovil("Ford", 2022, "alta", 33);
 autoFord.cargarCantidad();
 console.log(autoFord);
 autoFord.venderAutomovil(1);

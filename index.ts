@@ -1,5 +1,5 @@
 let readlineSync = require('readline-sync');
-let respuesta: string;
+let respuesta =  readlineSync.question("¿Quieres modificar su nombre? ");
 
 
 class Usuario{
@@ -18,9 +18,8 @@ class Usuario{
         this.edad=nuevaEdad;
         } 
 
-     modificarNombre():string {
-        respuesta=  readlineSync.question("¿Quieres modificar su nombre? ");
-         if (respuesta=="si")
+     modificarNombre(respuesta:string):string {
+         if (respuesta =="si")
             this.nombre = readlineSync.question("Ingrese su nuevo nombre: ");
          else {}
          return this.nombre;
@@ -35,10 +34,11 @@ class Automovil{
     private cantidadActual: number;
     private encendido: boolean;
 
-    constructor (ingresoMarca: string, ingresoModelo:number,ingresoGama:string){
-        this.marca = ingresoMarca;
-        this.modelo = ingresoModelo;
-        this.gama = ingresoGama;
+    constructor (pMarca: string, pModelo:number, pGama:string, pCantidadActual: number){
+        this.marca = pMarca;
+        this.modelo = pModelo;
+        this.gama = pGama;
+        this.cantidadActual = pCantidadActual;
         
     }
     
@@ -60,13 +60,13 @@ class Automovil{
 }
 
 
-let nuevoUsuario = new Usuario("Gonzalo",35,"hombre");
+let nuevoUsuario = new Usuario("Pedro",35,"hombre");
 console.log(nuevoUsuario);
-nuevoUsuario.modificarNombre();
+nuevoUsuario.modificarNombre(respuesta);
 nuevoUsuario.CargarEdad(36);
 console.log(nuevoUsuario);
 
-let autoFord = new Automovil ("Ford",2022,"alta");
+let autoFord = new Automovil ("Ford",2022,"alta",33);
 autoFord.cargarCantidad();
 console.log(autoFord);
 
