@@ -1,43 +1,6 @@
 let readlineSync = require('readline-sync');
-class Televisor {
-    private estaPrendido: boolean;
-    private volumenActual: number;
-    private canalActual: number;
+let respuesta: string;
 
-
-    constructor(volumenInicial: number, canalInicial: number) {
-        this.volumenActual = volumenInicial;
-        this.canalActual = canalInicial;
-    }
-
-    prenderApagar(): void {
-    if (this.estaPrendido)
-        this.estaPrendido = false
-    else
-        this.estaPrendido = true
-    }
-
-    subirVolumen(): void {
-        this.volumenActual = this.volumenActual + 1
-    }
-    bajarVolumen(): void {
-        this.volumenActual = this.volumenActual - 1
-    }
-
-    subirCanal(): void {
-        this.canalActual = this.canalActual + 1
-    }
-
-    bajarCanal(): void {
-        this.canalActual = this.canalActual - 1
-    }
-
-    elegirCanal(canal: number): void {
-        this.canalActual = canal;
-    }
-}
-let primerTelevisor = new Televisor(0,3);
-console.log(primerTelevisor);
 
 class Usuario{
     private nombre: string;
@@ -45,31 +8,68 @@ class Usuario{
     private genero : string;
     
 
-    constructor (nombreIngresado:string,edadIngresado: number, generoIngresado : string){
-        nombreIngresado = readlineSync.question("Ingrese su nombre: ");
+    constructor (nombreIngresado:string, edadIngresado: number, generoIngresado : string){
         this.nombre = nombreIngresado;
-        edadIngresado = parseInt( readlineSync.question("Ingrese su edad: "));
         this.edad = edadIngresado;
-        generoIngresado = readlineSync.question("Ingrese su genero: ");
         this.genero = generoIngresado;
         
     }
+     CargarEdad(nuevaEdad:number):void{
+        this.edad=nuevaEdad;
+        } 
 
-     modificarNombre():void {
-        let respuesta :string =  readlineSync.question("¿Quiere modificar su nombre? ");
+     modificarNombre():string {
+        respuesta=  readlineSync.question("¿Quieres modificar su nombre? ");
          if (respuesta=="si")
             this.nombre = readlineSync.question("Ingrese su nuevo nombre: ");
          else {}
+         return this.nombre;
      }
         
+}
+
+class Automovil{
+    private marca : string;
+    private modelo : number;
+    private gama: string;
+    private cantidadActual: number;
+    private encendido: boolean;
+
+    constructor (ingresoMarca: string, ingresoModelo:number,ingresoGama:string){
+        this.marca = ingresoMarca;
+        this.modelo = ingresoModelo;
+        this.gama = ingresoGama;
+        
+    }
+    
+    cargarCantidad():void{
+       this.cantidadActual = readlineSync.question("Ingrese cantidad de automoviles: ");
+           
+    }
+
+    venderAutomovil(cantidad:number):void{
+        this.cantidadActual = this.cantidadActual - cantidad;
+        
+    }
+    encenderApagar():void{
+        if (this.encendido)
+        this.encendido = false;
+    else
+        this.encendido = true;
+    }
 }
 
 
 let nuevoUsuario = new Usuario("Gonzalo",35,"hombre");
 console.log(nuevoUsuario);
 nuevoUsuario.modificarNombre();
-
+nuevoUsuario.CargarEdad(36);
 console.log(nuevoUsuario);
 
+let autoFord = new Automovil ("Ford",2022,"alta");
+autoFord.cargarCantidad();
+console.log(autoFord);
 
+autoFord.venderAutomovil(1);
+console.log(autoFord);
 
