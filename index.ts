@@ -1,75 +1,84 @@
 let readlineSync = require('readline-sync');
-let respuesta =  readlineSync.question("¿Quieres modificar su nombre? ");
 
-
-class Usuario{
+class Usuario {
     private nombre: string;
     private edad: number;
-    private genero : string;
-    
+    private genero: string;
 
-    constructor (nombreIngresado:string, edadIngresado: number, generoIngresado : string){
+    constructor(nombreIngresado: string, edadIngresado: number, generoIngresado: string) {
         this.nombre = nombreIngresado;
         this.edad = edadIngresado;
         this.genero = generoIngresado;
-        
-    }
-     CargarEdad(nuevaEdad:number):void{
-        this.edad=nuevaEdad;
-        } 
 
-     modificarNombre(respuesta:string):string {
-         if (respuesta =="si")
-            this.nombre = readlineSync.question("Ingrese su nuevo nombre: ");
-         else {}
-         return this.nombre;
-     }
-        
+    }
+
+    public getEdad(): number {
+        return this.edad;
+    }
+
+    public cargarEdad(nuevaEdad: number): void {
+        this.edad = nuevaEdad;
+    }
+
+    public getNombre(): string {
+        return this.nombre;
+    }
+
+    public modificarNombre(nuevoNombre: string): void {
+        this.nombre = nuevoNombre;
+    }
 }
 
-class Automovil{
-    private marca : string;
-    private modelo : number;
+class Automovil {
+    private marca: string;
+    private modelo: number;
     private gama: string;
-    private cantidadActual: number;
     private encendido: boolean;
+    private vendido: boolean;
 
-    constructor (pMarca: string, pModelo:number, pGama:string, pCantidadActual: number){
+    constructor(pMarca: string, pModelo: number, pGama: string, pEncendido: boolean, pVendido: boolean) {
         this.marca = pMarca;
         this.modelo = pModelo;
         this.gama = pGama;
-        this.cantidadActual = pCantidadActual;
-        
-    }
-    
-    cargarCantidad():void{
-       this.cantidadActual = readlineSync.question("Ingrese cantidad de automoviles: ");
-           
+        this.encendido = pEncendido,
+        this.vendido = pVendido;
     }
 
-    venderAutomovil(cantidad:number):void{
-        this.cantidadActual = this.cantidadActual - cantidad;
-        
+    public getVendido(): boolean {
+        return this.vendido;
     }
-    encenderApagar():void{
-        if (this.encendido)
-        this.encendido = false;
-    else
-        this.encendido = true;
+
+    public getEncendido(): boolean {
+        return this.encendido;
+    }
+
+    public encenderApagar(): void {
+        if (this.encendido) {
+            this.encendido = false;
+        } else {
+            this.encendido = true;
+        }
+    }
+
+    public vender(): void {
+        this.vendido = true;
     }
 }
 
 
-let nuevoUsuario = new Usuario("Pedro",35,"hombre");
-console.log(nuevoUsuario);
-nuevoUsuario.modificarNombre(respuesta);
-nuevoUsuario.CargarEdad(36);
-console.log(nuevoUsuario);
+let nuevoUsuario = new Usuario("Pedro", 35, "hombre");
+console.log("Nombre usuario: ", nuevoUsuario.getNombre());
+console.log("Edad usuario: ", nuevoUsuario.getEdad());
+let nuevoNombre = readlineSync.question("¿Cual es el nuevo nombre?");
+nuevoUsuario.modificarNombre(nuevoNombre);
+nuevoUsuario.cargarEdad(36);
+console.log("Nombre usuario: ", nuevoUsuario.getNombre());
+console.log("Edad usuario: ", nuevoUsuario.getEdad());
 
-let autoFord = new Automovil ("Ford",2022,"alta",33);
-autoFord.cargarCantidad();
-console.log(autoFord);
-
-autoFord.venderAutomovil(1);
-console.log(autoFord);
-
+let autoFord = new Automovil("Ford", 2022, "alta", true, false);
+console.log("Auto esta encendido: ", autoFord.getEncendido());
+console.log("Auto esta vendido: ", autoFord.getVendido());
+autoFord.encenderApagar();
+autoFord.vender();
+console.log("Auto esta encendido: ", autoFord.getEncendido());
+console.log("Auto esta vendido: ", autoFord.getVendido());
